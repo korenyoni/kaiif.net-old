@@ -8,4 +8,4 @@ jobs:
     steps:
       - checkout
       - run: go get github.com/gohugoio/hugo
-      - run: hugo -s ~/public
+      - run: hugo
