@@ -3,7 +3,7 @@ date = "2018-10-28"
 title = "About"
 +++
 
-_This site is powered by the web framework [Hugo](https://github.com/gohugoio/hugo) and the theme [cocoa-eh](https://github.com/mtn/cocoa-eh-hugo-theme)._
+_This site is built using the web framework [Hugo](https://github.com/gohugoio/hugo) and the theme [cocoa-eh](https://github.com/mtn/cocoa-eh-hugo-theme). Its delivery is another story._ 
 
 **I am an Architect, an Engineer.**
 
