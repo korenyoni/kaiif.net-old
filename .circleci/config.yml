@@ -10,8 +10,8 @@ jobs:
       - run: go get github.com/gohugoio/hugo
       - run: hugo
       - persist_to_workspace:
-        paths: 
-          - ~/kaiif.net/public
+          paths: 
+            - ~/kaiif.net/public
   build-docker:
     docker:
       - image: docker:17.05.0-ce-git
