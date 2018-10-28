@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  build-site:
     docker:
       - image: circleci/golang:1.11
       
@@ -9,3 +9,15 @@ jobs:
       - checkout
       - run: go get github.com/gohugoio/hugo
       - run: hugo
+      - persist_to_workspace:
+        paths: 
+          - ~/kaiif.net/public
+  build-docker:
+    docker:
+      - image: docker:17.05.0-ce-git
+    working_directory: ~/kaiif.net
+    steps:
+      - setup_remote_docker
+      - attach_workspace:
+          at: ~/kaiif.net/public
+      - run: docker build .
