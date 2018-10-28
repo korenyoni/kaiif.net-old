@@ -1,0 +1,11 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.11
+      
+    working_directory: ~/kaiif.net
+    steps:
+      - checkout
+      - run: go get github.com/gohugoio/hugo
+      - run: hugo -s ~/public
