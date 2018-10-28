@@ -21,7 +21,7 @@ jobs:
     steps:
       - setup_remote_docker
       - attach_workspace:
-          at: ~/kaiif.net/public
+          at: ~/kaiif.net
       - run: docker build .
 
 workflows:
