@@ -21,3 +21,13 @@ jobs:
       - attach_workspace:
           at: ~/kaiif.net/public
       - run: docker build .
+
+workflows:
+  version: 2
+
+  btd:
+    jobs:
+      - build-site
+      - build-docker:
+          requires:
+            - build-site
