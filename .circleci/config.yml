@@ -22,9 +22,9 @@ jobs:
       - setup_remote_docker
       - attach_workspace:
           at: ~/kaiif.net
-      - run: export IMAGE_ID=$(docker build .)
+      - run: docker build . -t kaiif/latest
       - run: docker login -u _json_key -p "$(echo $DOCKER_PUSH_GCLOUD_SA_JSON | base64 -d)" https://gcr.io
-      - run: docker tag $IMAGE_ID gcr.io/$GCLOUD_PROJECT_ID/kaiif
+      - run: docker tag kaiif/latest gcr.io/$GCLOUD_PROJECT_ID/kaiif
       - run: docker push gcr.io/$GCLOUD_PROJECT_ID/kaiif
 
 workflows:
