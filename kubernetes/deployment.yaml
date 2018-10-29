@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx-kaiif
+  name: nginx-kaiif
+  namespace: kube-public
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-kaiif
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: nginx-kaiif
+    spec:
+      containers:
+      - image: gcr.io/kaiif-220803/kaiif:latest
+        imagePullPolicy: Always
+        name: kaiif
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

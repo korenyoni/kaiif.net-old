@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nginx-kaiif
+  namespace: kube-public
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: kaiif-ip
+  labels:
+    app: nginx-kaiif
+spec:
+  backend:
+    serviceName: nginx-kaiif
+    servicePort: 80
