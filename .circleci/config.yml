@@ -27,7 +27,7 @@ jobs:
           at: ~/kaiif.net
       - run: docker build . -t kaiif/$(cat sha1-short)
       - run: docker login -u _json_key -p "$(echo $DOCKER_PUSH_GCLOUD_SA_JSON | base64 -d)" https://gcr.io
-      - run: docker tag kaiif/latest gcr.io/$GCLOUD_PROJECT_ID/kaiif/$(cat sha1-short)
+      - run: docker tag kaiif/$(cat sha1-short) gcr.io/$GCLOUD_PROJECT_ID/kaiif/$(cat sha1-short)
       - run: docker push gcr.io/$GCLOUD_PROJECT_ID/kaiif/$(cat sha1-short)
 
 workflows:
