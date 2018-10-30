@@ -14,6 +14,7 @@ jobs:
           paths: 
             - public
             - Dockerfile
+            - nginx.conf
   build-push-docker:
     docker:
       - image: docker:17.05.0-ce-git
