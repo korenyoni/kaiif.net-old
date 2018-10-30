@@ -30,6 +30,7 @@ jobs:
       - run: docker tag kaiif/$(cat sha1-short) gcr.io/$GCLOUD_PROJECT_ID/kaiif/$(cat sha1-short)
       - run: docker push gcr.io/$GCLOUD_PROJECT_ID/kaiif/$(cat sha1-short)
   deploy-kubernetes:
+     working_directory: ~/project
      docker:
        - image: alpine:3.8
      steps:
