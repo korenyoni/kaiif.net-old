@@ -9,12 +9,14 @@ jobs:
       - checkout
       - run: go get github.com/gohugoio/hugo
       - run: hugo
+      - run: git rev-parse --short HEAD >> sha1-short
       - persist_to_workspace:
           root: ~/kaiif.net
           paths: 
             - public
             - Dockerfile
             - nginx.conf
+            - sha1-short
   build-push-docker:
     docker:
       - image: docker:17.05.0-ce-git
@@ -23,10 +25,10 @@ jobs:
       - setup_remote_docker
       - attach_workspace:
           at: ~/kaiif.net
-      - run: docker build . -t kaiif/latest
+      - run: docker build . -t kaiif/$(cat sha1-short)
       - run: docker login -u _json_key -p "$(echo $DOCKER_PUSH_GCLOUD_SA_JSON | base64 -d)" https://gcr.io
-      - run: docker tag kaiif/latest gcr.io/$GCLOUD_PROJECT_ID/kaiif
-      - run: docker push gcr.io/$GCLOUD_PROJECT_ID/kaiif
+      - run: docker tag kaiif/latest gcr.io/$GCLOUD_PROJECT_ID/kaiif/$(cat sha1-short)
+      - run: docker push gcr.io/$GCLOUD_PROJECT_ID/kaiif/$(cat sha1-short)
 
 workflows:
   version: 2
