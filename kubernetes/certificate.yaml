@@ -1,0 +1,19 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: kaiif-net-tls
+  namespace: kube-public
+spec:
+  secretName: nginx-kaiif
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: kaiif.net
+  dnsNames:
+  - kaiif.net
+  acme:
+    config:
+    - http01:
+        ingress: nginx-kaiif
+      domains:
+      - kaiif.net
