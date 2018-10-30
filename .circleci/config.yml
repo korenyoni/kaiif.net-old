@@ -29,6 +29,15 @@ jobs:
       - run: docker login -u _json_key -p "$(echo $DOCKER_PUSH_GCLOUD_SA_JSON | base64 -d)" https://gcr.io
       - run: docker tag kaiif/$(cat sha1-short) gcr.io/$GCLOUD_PROJECT_ID/kaiif/$(cat sha1-short)
       - run: docker push gcr.io/$GCLOUD_PROJECT_ID/kaiif/$(cat sha1-short)
+   deploy-kubernetes:
+     docker:
+       - image: alpine:3.8
+     steps:
+       - run: apk update
+       - run: apk add git 
+       - checkout
+       - wget https://storage.googleapis.com/kubernetes-release/release/v1.12.1/bin/linux/amd64/kubectl
+       - run echo "493cefcae9536bfcf071684f82f2b30ef29b55d15f8d5cc045f22c24f17b9329056be0be7805faff9e8f19756c0a84e30e6cb4aeb3f719895d6ca1f1612c592b kubectl" | sha512sum -c
 
 workflows:
   version: 2
@@ -39,3 +48,6 @@ workflows:
       - build-push-docker:
           requires:
             - build-site
+      - deploy-kubernetes:
+          requires:
+            - build-push-docker
