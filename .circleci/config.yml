@@ -36,8 +36,8 @@ jobs:
        - run: apk update
        - run: apk add git 
        - checkout
-       - wget https://storage.googleapis.com/kubernetes-release/release/v1.12.1/bin/linux/amd64/kubectl
-       - run echo "493cefcae9536bfcf071684f82f2b30ef29b55d15f8d5cc045f22c24f17b9329056be0be7805faff9e8f19756c0a84e30e6cb4aeb3f719895d6ca1f1612c592b kubectl" | sha512sum -c
+       - run: wget https://storage.googleapis.com/kubernetes-release/release/v1.12.1/bin/linux/amd64/kubectl
+       - run: echo "493cefcae9536bfcf071684f82f2b30ef29b55d15f8d5cc045f22c24f17b9329056be0be7805faff9e8f19756c0a84e30e6cb4aeb3f719895d6ca1f1612c592b kubectl" | sha512sum -c
 
 workflows:
   version: 2
